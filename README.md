@@ -7,6 +7,20 @@ parses **HTML + PDFs**, and records **emails that match only the domains you all
 > ⚠️ Use only within a **clear scope** and with **written permission**. Follow site ToS, respect rate limits, and avoid evading logins/technical protections.
 
 ---
+## Why information gathering matters in Ethical Hacking
+Information Gathering (Recon/OSINT) is the **first, critical phase** of an ethical hacking engagement. With proper permission and scope, you map public-facing assets, discover **points of contact** (emails/phones), and learn where policies, press kits, or technical documents live. Good recon:
+- narrows the testing surface (focus on what’s in-scope),
+- avoids noisy or intrusive techniques,
+- improves reporting with verifiable sources (links, docs, timestamps),
+- and reduces risk by staying within public/approved data.
+
+**This tool helps** by automating public discovery from your seed URLs, safely and transparently:
+- records **only** emails ending with your allowed domains,
+- optionally extracts **phone numbers** (higher hit-rate on contact pages),
+- supports **HTML + PDFs**, external-follow (still domain-filtered results), UA rotation, and CSV output,
+- lets you keep **robots.txt** on (default) or turn it off **only if permitted**.
+
+---
 
 ## ✨ Features
 
@@ -61,6 +75,35 @@ python3 email_hunter.py --domains example.com --start-urls https://www.example.c
 **Single page only (no link-follow)**
 ```bash
 python3 email_hunter.py --domains example.com --start-urls https://www.example.com/contact --output findings.csv --max-pages 5 --depth 0 --rate 2.0 --include-phones --verbose
+```
+
+> Tip: You can pass **multiple** allowed domains if needed, e.g. `--domains example.com example.org`.
+
+---
+## One‑liner run commands (company‑agnostic, uses example.com)
+
+> Replace the domain and URLs with targets you are **authorized** to test.
+
+### Windows (PowerShell) — one line
+```powershell
+.\venv\Scripts\python.exe .\email_hunter.py --domains example.com --start-urls https://www.example.com https://www.example.com/about https://www.example.com/contact https://www.example.com/press --output findings.csv --max-pages 60 --depth 1 --rate 2.5 --include-pdfs --include-phones --external-follow --honor-robots false --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" --verbose
+```
+
+### macOS/Linux (Terminal) — one line
+```bash
+python3 email_hunter.py --domains example.com --start-urls https://www.example.com https://www.example.com/about https://www.example.com/contact https://www.example.com/press --output findings.csv --max-pages 60 --depth 1 --rate 2.5 --include-pdfs --include-phones --external-follow --honor-robots false --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15" --verbose
+```
+
+### “Create venv + install + run” in one line (optional convenience)
+
+**Windows PowerShell**
+```powershell
+py -m venv venv; .\venv\Scripts\python.exe -m pip install -U pip requests beautifulsoup4 pdfminer.six; .\venv\Scripts\python.exe .\email_hunter.py --domains example.com --start-urls https://www.example.com https://www.example.com/about https://www.example.com/contact https://www.example.com/press --output findings.csv --max-pages 60 --depth 1 --rate 2.5 --include-pdfs --include-phones --external-follow --honor-robots false --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36" --verbose
+```
+
+**macOS/Linux**
+```bash
+python3 -m venv venv && source venv/bin/activate && pip install -U pip requests beautifulsoup4 pdfminer.six && python3 email_hunter.py --domains example.com --start-urls https://www.example.com https://www.example.com/about https://www.example.com/contact https://www.example.com/press --output findings.csv --max-pages 60 --depth 1 --rate 2.5 --include-pdfs --include-phones --external-follow --honor-robots false --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15" --verbose
 ```
 
 > Tip: You can pass **multiple** allowed domains if needed, e.g. `--domains example.com example.org`.
@@ -129,6 +172,12 @@ phone,+8801XXXXXXXXX,,https://www.example.com/about,html,About,"...call us at +8
 
 ---
 
+## Ethics & Scope
+- Run only with **written permission** and a defined scope.
+- Keep your footprint small (`--rate`, `--max-pages`, `--depth`).
+- Do **not** break logins, bypass technical protections, or violate any ToS.
+
+---
 
 ## 📚 License
 
