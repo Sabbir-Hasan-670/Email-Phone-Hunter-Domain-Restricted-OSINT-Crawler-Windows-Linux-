@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "email-phone-hunter"
+version = "0.1.0"
+description = "Domain-restricted OSINT email & phone finder (HTML + PDF) for ethical, permissioned recon."
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [{name = "Your Name"}]
+keywords = ["osint", "recon", "security", "email", "phone", "crawler"]
+dependencies = [
+  "requests>=2.28",
+  "beautifulsoup4>=4.11"
+]
+
+[project.optional-dependencies]
+pdf = ["pdfminer.six>=20221105"]
+
+[project.scripts]
+email-hunter = "email_hunter.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+email_hunter = ["py.typed"]
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+profile = "black"
