@@ -80,7 +80,7 @@ python3 email_hunter.py --domains example.com --start-urls https://www.example.c
 > Tip: You can pass **multiple** allowed domains if needed, e.g. `--domains example.com example.org`.
 
 ---
-## One‑liner run commands (company‑agnostic, uses example.com)
+## One‑liner run commands (company‑agnostic, uses example.com) Another Option to Run the Script.
 
 > Replace the domain and URLs with targets you are **authorized** to test.
 
